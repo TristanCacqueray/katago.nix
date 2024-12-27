@@ -3,7 +3,7 @@
 Generate KaTrain config using katago "human-like" model:
 
 ```ShellSession
-$ nix build .#katrain.engine.human && cat result | jq
+$ nix build .#katrain.engine.human12k && cat result | jq
 {
   "_enable_ownership": true,
   "altcommand": "",

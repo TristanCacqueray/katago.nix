@@ -58,14 +58,20 @@
         wide_root_noise = 4.0e-2;
         _enable_ownership = true;
       };
-      humanConfig = baseConfig // {
+      humanConfig12k = baseConfig // {
         katago = "${human-wrapper}";
         config = builtins.toString (mkHumanConfig "preaz_12k");
+      };
+      humanConfig1d = baseConfig // {
+        katago = "${human-wrapper}";
+        config = builtins.toString (mkHumanConfig "preaz_1d");
       };
     in {
       katrain.engine.default =
         pkgs.writeText "katrain-config.json" (builtins.toJSON baseConfig);
-      katrain.engine.human =
-        pkgs.writeText "katrain-config.json" (builtins.toJSON humanConfig);
+      katrain.engine.human1d =
+        pkgs.writeText "katrain-config.json" (builtins.toJSON humanConfig1d);
+      katrain.engine.human12k =
+        pkgs.writeText "katrain-config.json" (builtins.toJSON humanConfig12k);
     };
 }
