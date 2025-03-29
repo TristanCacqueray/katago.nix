@@ -15,8 +15,8 @@
 
       kata1 = pkgs.fetchurl {
         url =
-          "https://media.katagotraining.org/uploaded/networks/models/kata1/kata1-b28c512nbt-s7332806912-d4357057652.bin.gz";
-        sha256 = "07cxc5ggjqn06f3ww3xprynzg5diply66npvpqwkggnfvp362s7z";
+          "https://media.katagotraining.org/uploaded/networks/models/kata1/kata1-b28c512nbt-s8476434688-d4668249792.bin.gz";
+        sha256 = "sha256-UKp7uFOXFzuOAc6qiowKv+pSZf2bQIf43gNqCEd5AaA=";
       };
 
       # Commands
@@ -31,8 +31,8 @@
       # Config
       katrain-config = pkgs.fetchurl {
         url =
-          "https://raw.githubusercontent.com/sanderland/katrain/5ccab8e2eedcd046219f8b848ab05ef0d8cec289/katrain/KataGo/analysis_config.cfg";
-        sha256 = "158pd2b4wnkl4py0df0x0mp4qr8jv7fkq6mir9s2n3521lk7zaf0";
+          "https://raw.githubusercontent.com/sanderland/katrain/3fa41ff4e08f5088a6e48322f2d967d62cf39cac/katrain/KataGo/analysis_config.cfg";
+        sha256 = "sha256-wKl/Jg2iDCt0yrEaPN3ZEmVMbgUduAb8JXRaTpZoF5U=";
       };
       human-config-5k = pkgs.fetchurl {
         url =
@@ -43,7 +43,10 @@
       mkHumanConfig = rank:
         pkgs.writeText "katago-${rank}.cfg"
         (builtins.replaceStrings [ "humanSLProfile = preaz_5k" ]
-          [ "humanSLProfile = ${rank}" ] human-config-text);
+          [ "humanSLProfile = ${rank}" ] (human-config-text + ''
+
+            numAnalysisThreads = 12
+          ''));
 
       # Katrain Config
       baseConfig = {
